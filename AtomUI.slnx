@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Gallery/">
     <Project Path="controlgallery/AtomUIGallery.Desktop/AtomUIGallery.Desktop.csproj" />
+    <Project Path="controlgallery/AtomUIGallery.Generator/AtomUIGallery.Generator.csproj" />
     <Project Path="controlgallery/AtomUIGallery.Icons.Desktop/AtomUIGallery.Icons.Desktop.csproj" />
     <Project Path="controlgallery/AtomUIGallery/AtomUIGallery.csproj" />
   </Folder>

@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Metadata;
+using AtomUIGallery.ShowCases;
 using AvaloniaControlList = Avalonia.Controls.Controls;
 
 namespace AtomUIGallery.Controls;
@@ -18,10 +19,29 @@ public class ShowCasePanel : TemplatedControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         var effectCount = 0;
+        var showCaseIndex = 0;
+
+        // 獲取父級 ShowCase 頁面的類名
+        var showCaseClassName = GetShowCaseClassName();
+
         foreach (var child in Children)
         {
             if (child is ShowCaseItem showCaseItem)
             {
+                // 設置索引
+                showCaseItem.Index = showCaseIndex;
+
+                // 嘗試從生成的代碼中獲取源代碼
+                if (showCaseClassName != null)
+                {
+                    var sourceCode = ShowCaseSourceCodeProvider.GetSourceCode(showCaseClassName, showCaseIndex);
+                    if (sourceCode != null)
+                    {
+                        showCaseItem.SourceCode = sourceCode;
+                    }
+                }
+
+                showCaseIndex++;
                 effectCount++;
                 if (showCaseItem.IsOccupyEntireRow)
                 {
@@ -43,7 +63,7 @@ public class ShowCasePanel : TemplatedControl
         {
             var row = 0;
             var column = 0;
-            
+
             for (var i = 0; i < Children.Count; ++i)
             {
                 if (Children[i] is ShowCaseItem item)
@@ -55,7 +75,7 @@ public class ShowCasePanel : TemplatedControl
                             row++;
                         }
                         Grid.SetRow(item, row++);
-                        
+
                         Grid.SetColumn(item, 0);
                         Grid.SetColumnSpan(item, 2);
                     }
@@ -73,7 +93,7 @@ public class ShowCasePanel : TemplatedControl
                     LogicalChildren.Add(item);
                 }
             }
-            
+
             var rowDefinitions = new RowDefinitions();
             for (var i = 0; i < row; ++i)
             {
@@ -98,5 +118,23 @@ public class ShowCasePanel : TemplatedControl
 
     internal virtual void NotifyDeactivated()
     {
+    }
+
+    /// <summary>
+    /// 獲取包含此 ShowCasePanel 的 ShowCase 頁面的類名
+    /// </summary>
+    private string? GetShowCaseClassName()
+    {
+        // 向上遍歷視覺樹，找到 UserControl 類型的父級
+        var parent = this.Parent;
+        while (parent != null)
+        {
+            if (parent is UserControl userControl)
+            {
+                return userControl.GetType().Name;
+            }
+            parent = (parent as Control)?.Parent;
+        }
+        return null;
     }
 }
