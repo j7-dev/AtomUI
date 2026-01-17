@@ -14,8 +14,7 @@ namespace AtomUIGallery.ShowCases.Views;
 /// 包含導覽選單、下拉選單、右鍵選單和浮出選單
 /// Includes navigation menus, dropdown menus, context menus, and flyout menus
 /// </summary>
-public partial class 
-    MenuShowCase : ReactiveUserControl<MenuViewModel>
+public partial class MenuShowCase : ReactiveUserControl<MenuViewModel>
 {
     /// <summary>
     /// 導覽選單預設選取項目
