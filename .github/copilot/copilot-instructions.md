@@ -260,12 +260,39 @@ public class Drawer : Control
 - 遵循專案的現有提交訊息風格
 - 在適用時引用問題編號
 
+## 註釋和語言約定
+
+### 註釋語言
+- **代碼內註釋**：使用簡體中文（例如：`// 处理接近完全透明的情况`）
+- **XML 文檔註釋**：可使用繁體中文或簡體中文，保持一致性
+- **區域標記**：使用簡體中文（例如：`#region 公共属性定义`）
+- **TODO 註釋**：使用簡體中文（例如：`// TODO 看后期是否需要改进，做一个缓存`）
+- 遵循現有代碼中的註釋風格和語言
+
 ## Avalonia XAML 模式
 
 ### XAML 檔案組織
 - 使用 `.axaml` 副檔名作為 Avalonia XAML
 - 遵循代碼後置檔案的命名約定（`.axaml.cs`）
 - 使用適當的命名空間聲明
+
+### XAML 格式化（基於 Settings.XamlStyler）
+- 每行最多 1 個屬性（MaxAttributesPerLine: 1）
+- 每行最多 120 個字元（MaxAttributeCharactersPerLine: 120）
+- 第一個屬性保持在同一行（KeepFirstAttributeOnSameLine: true）
+- 空元素移除結束標籤（RemoveEndingTagOfEmptyElement: true）
+- 關閉斜線前有空格（SpaceBeforeClosingSlash: true）
+- 按名稱排序屬性（OrderAttributesByName: true）
+
+### 屬性排序規則（遵循 Settings.XamlStyler）
+1. `x:Class`
+2. `xmlns`, `xmlns:x`
+3. `xmlns:*`（其他命名空間）
+4. `x:Key`, `Key`, `x:Name`, `Name`
+5. 佈局屬性（Grid.Row, Grid.Column 等）
+6. 尺寸屬性（Width, Height, MinWidth 等）
+7. 邊距和對齊（Margin, Padding, HorizontalAlignment 等）
+8. 其他屬性
 
 ### 樣式和主題
 - 遵循 Ant Design 設計語言
