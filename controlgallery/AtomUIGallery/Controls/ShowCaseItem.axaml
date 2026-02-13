@@ -22,6 +22,25 @@
                         <atom:TextBlock TextWrapping="Wrap"
                                         Margin="0, 10, 0, 0"
                                         Text="{TemplateBinding Description}" />
+
+
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,10" Spacing="10">
+                            <TextBlock Text="Show Code:" VerticalAlignment="Center" />
+                            <atom:ToggleSwitch SizeType="Small" IsChecked="{TemplateBinding IsChecked, Mode=TwoWay}" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <atom:TextBox
+                            x:Name="PART_CodeBlock"
+                            IsVisible="{TemplateBinding IsChecked}"
+                            IsReadOnly="True"
+                            SizeType="Small"
+                            Padding="4"
+                            AcceptsReturn="True"
+                            VerticalContentAlignment="Top"
+                            HorizontalContentAlignment="Left"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            BorderBrush="{DynamicResource {x:Static atom:SharedTokenKey.ColorBorder}}"
+                            TextWrapping="NoWrap" />
                     </StackPanel>
                 </Border>
             </ControlTemplate>

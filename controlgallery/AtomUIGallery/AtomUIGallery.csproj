@@ -15,6 +15,11 @@
         <Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs"/>
     </ItemGroup>
 
+    <!-- 將 ShowCases 目錄下的 axaml 文件作為 AdditionalFiles 提供給源生成器 -->
+    <ItemGroup>
+        <AdditionalFiles Include="ShowCases/**/*.axaml" />
+    </ItemGroup>
+
     <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
         <PackageReference Include="AtomUI.Desktop.Controls"/>
         <PackageReference Include="AtomUI.Desktop.Controls.DataGrid"/>
@@ -35,15 +40,23 @@
                           PrivateAssets="all" />
     </ItemGroup>
 
+    <!-- 引用 ShowCase 源代碼生成器 -->
+    <ItemGroup>
+        <ProjectReference Include="../AtomUIGallery.Generator/AtomUIGallery.Generator.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false"
+                          PrivateAssets="all" />
+    </ItemGroup>
+
     <ItemGroup>
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
     </ItemGroup>
-    
+
     <ItemGroup>
       <ProjectReference Include="../AtomUIGallery.Icons.Desktop/AtomUIGallery.Icons.Desktop.csproj" />
     </ItemGroup>
-    
+
     <ItemGroup>
       <AdditionalFiles Include="ShowCases\Views\DataEntry\CascaderShowCase.axaml" />
     </ItemGroup>
